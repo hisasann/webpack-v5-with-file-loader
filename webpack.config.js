@@ -22,38 +22,12 @@ let config = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              url: true,
-            },
-          },
-        ],
-      },
-      {
-        test: /\.[jt]sx?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            plugins: [environment === 'development' && require.resolve('react-refresh/babel')].filter(Boolean),
-          },
-        },
-      },
-      {
         test: /\.(png|jpg|gif)$/i,
-        // ここから変更。useがなくなり。typeが変更されている。
         generator: {
           filename: 'images/[name][ext][query]'
         },
         type: 'asset/resource'
       },
-
       // {
       //   test: /\.(jpe?g|png|gif|svg)$/i,
       //   use: [
@@ -72,6 +46,30 @@ let config = {
       //     },
       //   ],
       // },
+      {
+        test: /\.[jt]sx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            plugins: [environment === 'development' && require.resolve('react-refresh/babel')].filter(Boolean),
+          },
+        },
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              url: true,
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
